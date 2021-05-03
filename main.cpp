@@ -13,11 +13,8 @@
 #define SCREEN_HEIGHT 720
 
 BaseObject g_background;
-
 BaseObject g_ground;
-
 BaseObject coin;
-
 HightScore rate_;
 
 bool InitData()
@@ -313,12 +310,12 @@ int main(int argc, char* argv[])
     {
         if (is_ready)
         {
-           
+
             Player.SetVal(0);
             ground_val = 0;
             bg_val = 0;
             listpipe.SetVal(0);
-           
+
             if (index_ > 2)
             {
                 is_ready = false;
@@ -326,7 +323,7 @@ int main(int argc, char* argv[])
                 Player.SetVal(1);
                 ground_val = 5;
                 bg_val = 2;
-                listpipe.SetVal(-5);   
+                listpipe.SetVal(-5);
             }
             if (index_ == 0)
             {
@@ -357,17 +354,17 @@ int main(int argc, char* argv[])
                 {
                 case SDLK_x:
                     is_pause = true;
-                   
+
                     Player.SetVal(0);
                     ground_val = 0;
                     bg_val = 0;
                     listpipe.SetVal(0);
-                    
+
                     break;
                 }
             }
         }
-  
+
         SDL_SetRenderDrawColor(g_screen, RENDER_DRAW_COLOR,
             RENDER_DRAW_COLOR,
             RENDER_DRAW_COLOR,
@@ -381,18 +378,21 @@ int main(int argc, char* argv[])
         }
         g_background.SetRect(bg_x_, g_background.GetRect().y);
         g_background.Render(g_screen);
-       
-      
-        listpipe.ShowList(g_screen,Player,score);
+
+
+        listpipe.ShowList(g_screen, Player, score);
         effect.SetRect(Player.GetRect().x - 35, Player.GetRect().y - 12 - 35);
-       //check pass, add diem
+        //check pass, add diem
         if (score.GetAddScore() && is_pause == false)
         {
             score.Add();
             effect.SetEffect(true);
             score.SetAddScore(false);
         }
-        listpipe.SetVal(-score.GetScoreVal() / 200 - 5);
+        if (!is_pause)
+        {
+            listpipe.SetVal(-score.GetScoreVal() / 200 - 5);
+        }
 
        //check va  cham
         if (Player.GetCol())
@@ -418,24 +418,6 @@ int main(int argc, char* argv[])
             ButtonObject resume;
             resume.loadImage("image//resume.png", g_screen);
             resume.SetRect(450, 300);
-           /* ButtonObject menuButton;
-            menuButton.loadImage("image//menu.png", g_screen);
-            menuButton.SetRect(600, 350);
-            */
-           /* menuButton.MouseEvent();*/
-            
-            //if (menuButton.GetIsPress())
-            //{
-            //    // game_over_time = false;
-            //    is_pause = false;
-            //    goto Menu;
-            //}
-            //if (menuButton.GetIsUse())
-            //{
-            //    is_pause = false;
-            //    quite = true;
-
-            //}
             resume.MouseEvent();  
             if (resume.GetIsPress())
             {
@@ -448,11 +430,11 @@ int main(int argc, char* argv[])
             }
             if (resume.GetIsUse())
             {
-                is_pause = false;
+                //is_pause = false;
                 quite = true;
             }
             resume.Show(g_screen);
-           // menuButton.Show(g_screen);
+          
         }
  
         score.InitScore(g_screen, 890, 920, 950,10);
@@ -463,10 +445,7 @@ int main(int argc, char* argv[])
         {
              ready_go.Render(g_screen);
         }
-       
-        
-       
-       
+ 
         SDL_RenderPresent(g_screen);
 
         int real_time_ = fps.get_ticks();
@@ -479,11 +458,10 @@ int main(int argc, char* argv[])
         }
         
         bool gameOver = Player.GetIsDie();
-        cout << gameOver << endl;
         if (gameOver)
         {   
-             //SDL_Delay(2000);
-            //listpipe.SetStopMove(true);
+            SDL_Delay(2000);
+            listpipe.SetStopMove(true);
             CommonFunction::LoadAudio("audio//die.wav");
             
             H_S.UpdateHightScore(score.GetScoreVal());

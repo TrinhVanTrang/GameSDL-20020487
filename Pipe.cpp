@@ -46,7 +46,7 @@ DoublePipe::DoublePipe()
 	is_pass_ = false;
 	is_pause_ = false;
 	x_val_ = -5;
-	y_val_ = 0;
+	//y_val_ = 0;
 	d_height_ = 150;
 }
 
@@ -59,22 +59,22 @@ void DoublePipe::Init(SDL_Renderer* screen, const int& xpos)
 {
 	up_pipe_.LoadImg("image//up_pipe.png", screen);
 	down_pipe_.LoadImg("image//down_pipe.png", screen);
-	down_pipe_.SetPos(xpos, CommonFunction::Random(150, -150) + 650 - d_height_);
+	down_pipe_.SetPos(xpos, CommonFunction::Random(150, -150) + 550 - d_height_);
 	up_pipe_.SetPos(xpos, down_pipe_.GetRect().y - d_height_ - 520);
 
-	up_tree_.loadimage("image//tree1.png", screen);
-	down_tree_.loadimage("image//tree1.png", screen);
+	/*up_tree_.loadimage("image//frametree_up.png", screen);
+	down_tree_.loadimage("image//frametree_down.png", screen);
 	up_tree_.SetPos(xpos, up_pipe_.GetRect().y + up_pipe_.GetRect().h - up_tree_.GetRect().w);
-	down_tree_.SetPos(xpos, down_pipe_.GetRect().y );
+	down_tree_.SetPos(xpos, down_pipe_.GetRect().y );*/
 	
 }
 
 void DoublePipe::ShowImage(SDL_Renderer* screen)
 {
-	down_tree_.Render(screen);
+	//down_tree_.Show(screen);
 	down_pipe_.ShowImg(screen);
 
-	up_tree_.Render(screen);
+	//up_tree_.Show(screen);
 	up_pipe_.ShowImg(screen);
 
 }
@@ -83,8 +83,8 @@ void DoublePipe::Move()
 {
 	down_pipe_.DoRun(x_val_);
 	up_pipe_.DoRun(x_val_);
-	down_tree_.DoRun(x_val_);
-	up_tree_.DoRun(x_val_);
+	/*down_tree_.DoRun(x_val_);
+	up_tree_.DoRun(x_val_);*/
 	if(down_pipe_.GetStateBack() || up_pipe_.GetStateBack())
 	{
 		is_back_ = true;
@@ -97,17 +97,17 @@ void DoublePipe::SetIsBack(bool b)
 {
 	is_back_ = b;
 	down_pipe_.SetBack(b);
-	down_tree_.SetBack(b);
+	//down_tree_.SetBack(b);
 	up_pipe_.SetBack(b);
-	up_tree_.SetBack(b);
+	//up_tree_.SetBack(b);
 
 }
 void DoublePipe::SetXRect(const int& xp)
 {
 	down_pipe_.SetXPos(xp);
-	down_tree_.SetXPos(xp);
+	//down_tree_.SetXPos(xp);
 	up_pipe_.SetXPos(xp);
-	up_tree_.SetXPos(xp);
+	//up_tree_.SetXPos(xp);
 	
 
 }
@@ -131,46 +131,46 @@ void DoublePipe::SetVal(int v)
 bool DoublePipe::CheckCol(SDL_Rect obj)
 {
 	if (CommonFunction::CheckCollision(obj, down_pipe_.GetRect()) ||
-		CommonFunction::CheckCollision(obj, up_pipe_.GetRect()) ||
+		CommonFunction::CheckCollision(obj, up_pipe_.GetRect()) /*||
 		CommonFunction::CheckCollision(obj, up_tree_.GetRect()) ||
-		CommonFunction::CheckCollision(obj, down_tree_.GetRect()))
+		CommonFunction::CheckCollision(obj, down_tree_.GetRect())*/)
 	{
 		return true;
 	}
 	return false;
 }
 
-void DoublePipe::Appear()
-{
-	int rand = CommonFunction::Random(3, 1);
-	if (rand == 1)
-	{
-		up_tree_.DoAppear(y_val_);
-		if (up_tree_.GetRect().y + up_tree_.GetRect().h - up_pipe_.GetRect().y - up_pipe_.GetRect().h == 100)
-		{
-			y_val_ = 0;
-		}
-	}
-	if (rand == 2)
-	{
-		down_tree_.DoAppear(-y_val_);
-		if (down_tree_.GetRect().y  - down_pipe_.GetRect().y  == -100)
-		{
-			y_val_ = 0;
-		}
-	}
-	if (rand == 3)
-	{
-		up_tree_.DoAppear(y_val_/2);
-		down_tree_.DoAppear(-y_val_/2);
-		if (up_tree_.GetRect().y + up_tree_.GetRect().h - up_pipe_.GetRect().y - up_pipe_.GetRect().h == 50||
-			down_tree_.GetRect().y - down_pipe_.GetRect().y == -50)
-		{
-			y_val_ = 0;
-		}
-		
-	}
-}
+//void DoublePipe::Appear()
+//{
+//	int rand = CommonFunction::Random(3, 1);
+//	if (rand == 1)
+//	{
+//		up_tree_.DoAppear(y_val_);
+//		if (up_tree_.GetRect().y + up_tree_.GetRect().h - up_pipe_.GetRect().y - up_pipe_.GetRect().h == 100)
+//		{
+//			y_val_ = 0;
+//		}
+//	}
+//	if (rand == 2)
+//	{
+//		down_tree_.DoAppear(-y_val_);
+//		if (down_tree_.GetRect().y  - down_pipe_.GetRect().y  == -100)
+//		{
+//			y_val_ = 0;
+//		}
+//	}
+//	if (rand == 3)
+//	{
+//		up_tree_.DoAppear(y_val_/2);
+//		down_tree_.DoAppear(-y_val_/2);
+//		if (up_tree_.GetRect().y + up_tree_.GetRect().h - up_pipe_.GetRect().y - up_pipe_.GetRect().h == 50||
+//			down_tree_.GetRect().y - down_pipe_.GetRect().y == -50)
+//		{
+//			y_val_ = 0;
+//		}
+//		
+//	}
+//}
 
 //=========================
 
@@ -205,6 +205,7 @@ void PipeList::SetVal(int x)
 		DoublePipe* p_pipe = list_.at(i);
 		p_pipe->SetVal(x);
 	}
+	
 }
 
 void PipeList::InitList(SDL_Renderer* screen)
@@ -252,7 +253,7 @@ void PipeList::ShowList(SDL_Renderer* screen, PlayerObject &obj,ScoreObject &scr
 					p_pipe->SetXRect(temp_pipe->GetXpos() + 200);
 					p_pipe->SetIsBack(false);
 				}
-				p_pipe->Appear();
+				//p_pipe->Appear();
 				p_pipe->CheckPass(obj.GetRect());
 				if (p_pipe->GetIsPass())
 				{
@@ -262,7 +263,7 @@ void PipeList::ShowList(SDL_Renderer* screen, PlayerObject &obj,ScoreObject &scr
 
 				if (p_pipe->CheckCol(obj.GetRect()))
 				{
-					obj.SetCol(false);
+					obj.SetCol(true);
 				}
 			}
 		
