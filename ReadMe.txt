@@ -33,12 +33,13 @@
 +Tạo hiệu ứng chuyển động của Background 
 +Tạo hiệu ứng khi đượ cộng điểm 
 +Thêm các hiệu ứng âm thanh
+
 -Xây dựng các dao diện 
 +Xây dựng dao diện Menu, GameOver, ... 
 +Thêm nhạc nền cho game
 
 -Cải tiến game 
-+Thay đổi cơ chế hoạt động của các Pipe: ngẫu nhiên xuất hiện các Tree từ các Pipe (?????) 
++Thay đổi cơ chế hoạt động của các Pipe: ngẫu nhiên xuất hiện các Tree từ trong các Pipe (?????) 
 +Tạo một đối tượng BOSS để "phá đảo" game(?????) 
 ............
 
