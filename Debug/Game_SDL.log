@@ -1,0 +1,11 @@
+﻿  Pipe.cpp
+C:\Users\HP\OneDrive\Desktop\Game_SDL\Game_SDL\Pipe.cpp(148,21): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\HP\OneDrive\Desktop\Game_SDL\Game_SDL\Pipe.cpp(156,23): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\HP\OneDrive\Desktop\Game_SDL\Game_SDL\Pipe.cpp(164,27): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\HP\OneDrive\Desktop\Game_SDL\Game_SDL\Pipe.cpp(165,30): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\HP\OneDrive\Desktop\Game_SDL\Game_SDL\Pipe.cpp(192,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\HP\OneDrive\Desktop\Game_SDL\Game_SDL\Pipe.cpp(203,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\HP\OneDrive\Desktop\Game_SDL\Game_SDL\Pipe.cpp(242,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\HP\OneDrive\Desktop\Game_SDL\Game_SDL\Pipe.cpp(308,12): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\HP\OneDrive\Desktop\Game_SDL\Game_SDL\Pipe.cpp(309,12): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Game_SDL.vcxproj -> C:\Users\HP\OneDrive\Desktop\Game_SDL\Debug\Game_SDL.exe
